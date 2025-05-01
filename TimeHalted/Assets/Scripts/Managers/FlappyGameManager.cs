@@ -32,7 +32,6 @@ public class FlappyGameManager : MonoBehaviour
 
     public void GameOver()
     {
-        Debug.Log("GameOver");
         UpdateScore();
         UIManager.Instance.ChangeState(UIState.Score);
     }

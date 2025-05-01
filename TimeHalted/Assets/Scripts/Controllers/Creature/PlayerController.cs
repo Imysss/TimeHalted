@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : CreatureController
 {
@@ -32,6 +33,22 @@ public class PlayerController : CreatureController
         else
         {
             lookDirection = lookDirection.normalized;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("FlappyGame"))
+        {
+            SceneManager.LoadScene("FlappyBirdScene");
+        }
+        else if(collision.gameObject.CompareTag("StackGame"))
+        {
+            Debug.Log("Load Stack Game");
+        }
+        else if(collision.gameObject.CompareTag("ShootingGame"))
+        {
+            Debug.Log("Load Shooting Game");
         }
     }
 }

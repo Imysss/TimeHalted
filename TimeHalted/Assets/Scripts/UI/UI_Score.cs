@@ -35,7 +35,6 @@ public class UI_Score : BaseUI
 
     public void OnClickExitButton()
     {
-        Debug.Log("Exit Button Click");
         SceneManager.LoadScene("MainScene");
     }
 }
