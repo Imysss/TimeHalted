@@ -9,8 +9,8 @@ public class FlappyGameManager : MonoBehaviour
 
     [SerializeField] private int currentScore = 0;
 
-    [SerializeField] private int bestScore = 0;
-    [SerializeField] public int BestScore { get => bestScore; }
+    [SerializeField] private int flappyBestScore = 0;
+    [SerializeField] public int FlappyBestScore { get => flappyBestScore; }
 
     [SerializeField] private const string BestScoreKey = "FlappyBestScore";
 
@@ -22,7 +22,7 @@ public class FlappyGameManager : MonoBehaviour
 
     private void Start()
     {
-        bestScore = PlayerPrefs.GetInt(BestScoreKey, 0);
+        flappyBestScore = PlayerPrefs.GetInt(BestScoreKey, 0);
     }
 
     public void StartGame()
@@ -44,13 +44,13 @@ public class FlappyGameManager : MonoBehaviour
 
     public void UpdateScore()
     {
-        if (bestScore < currentScore)
+        if (flappyBestScore < currentScore)
         {
-            bestScore = currentScore;
+            flappyBestScore = currentScore;
 
-            PlayerPrefs.SetInt(BestScoreKey, bestScore);
+            PlayerPrefs.SetInt(BestScoreKey, flappyBestScore);
         }
 
-        UIManager.Instance.UpdateScore(currentScore, bestScore);
+        UIManager.Instance.UpdateScore(currentScore, flappyBestScore);
     }
 }

@@ -7,11 +7,27 @@ using UnityEngine.SceneManagement;
 public class PlayerController : CreatureController
 {
     private Camera camera;
+    private float detectionRadius = 1.5f;
+    [SerializeField] private LayerMask npcLayer;
+    [SerializeField] private GameObject UI_PressSpace;
 
     protected override void Start()
     {
         base.Start();
         camera = Camera.main;
+        npcLayer = LayerMask.GetMask("NPC");
+
+        UI_PressSpace.SetActive(false);
+    }
+
+    public void Interact()
+    {
+        Collider2D npc = Physics2D.OverlapCircle(transform.position, detectionRadius, npcLayer);
+        if (npc != null)
+        {
+            GameManager.Instance.DialogueManager.ShowDialogueUI(npc.GetComponent<NpcController>());
+            UI_PressSpace.SetActive(false);
+        }
     }
 
     void OnMove(InputValue inputValue)
@@ -36,6 +52,14 @@ public class PlayerController : CreatureController
         }
     }
 
+    void OnInteract(InputValue inputValue)
+    {
+        if (inputValue.isPressed)
+        {
+            Interact();
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("FlappyGame"))
@@ -50,5 +74,14 @@ public class PlayerController : CreatureController
         {
             Debug.Log("Load Shooting Game");
         }
+        else if(collision.gameObject.CompareTag("NPC"))
+        {
+            UI_PressSpace.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        UI_PressSpace.SetActive(false);
     }
 }
