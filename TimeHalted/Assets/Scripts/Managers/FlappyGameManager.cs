@@ -14,6 +14,7 @@ public class FlappyGameManager : MonoBehaviour
 
     [SerializeField] private const string BestScoreKey = "FlappyBestScore";
 
+    [SerializeField] GameObject selectedPlanePrefab;
     private void Awake()
     {
         instance = this;
@@ -23,6 +24,16 @@ public class FlappyGameManager : MonoBehaviour
     private void Start()
     {
         flappyBestScore = PlayerPrefs.GetInt(BestScoreKey, 0);
+
+        //선택한 비행기 가져오기
+        selectedPlanePrefab = SelectedPlaneData.selectedPlanePrefab;
+        if (selectedPlanePrefab != null)
+        {
+            GameObject plane = GameObject.Find("Plane");
+            GameObject instance = Instantiate(selectedPlanePrefab, plane.transform);
+            instance.transform.localPosition = Vector3.zero;
+            plane.GetComponent<PlaneController>().Init();
+        }
     }
 
     public void StartGame()

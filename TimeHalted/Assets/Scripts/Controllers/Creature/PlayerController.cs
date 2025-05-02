@@ -9,7 +9,7 @@ public class PlayerController : CreatureController
     private Camera camera;
     private float detectionRadius = 1.5f;
     [SerializeField] private LayerMask npcLayer;
-    [SerializeField] private GameObject UI_PressSpace;
+    [SerializeField] public GameObject UI_PressSpace;
 
     protected override void Start()
     {
@@ -25,7 +25,15 @@ public class PlayerController : CreatureController
         Collider2D npc = Physics2D.OverlapCircle(transform.position, detectionRadius, npcLayer);
         if (npc != null)
         {
-            GameManager.Instance.DialogueManager.ShowDialogueUI(npc.GetComponent<NpcController>());
+            NpcController npcController = npc.GetComponent<NpcController>();
+            if (npcController.NPCType == NPCType.Talk)
+            {
+                GameManager.Instance.DialogueManager.ShowDialogueUI(npc.GetComponent<NpcController>());
+            }
+            else if (npcController.NPCType == NPCType.Shop)
+            {
+                npcController.OpenShop();
+            }
             UI_PressSpace.SetActive(false);
         }
     }
@@ -82,6 +90,7 @@ public class PlayerController : CreatureController
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        UI_PressSpace.SetActive(false);
+        if (UI_PressSpace != null)
+            UI_PressSpace.SetActive(false);
     }
 }

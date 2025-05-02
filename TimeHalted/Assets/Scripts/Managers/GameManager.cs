@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     private DialogueManager dialogue;
     public DialogueManager DialogueManager { get { return dialogue; } }
 
+    private PlaneShopManager planeShopManager;
+    public PlaneShopManager PlaneShopManager { get { return planeShopManager; } }
+
     private void Awake()
     {
         instance = this;
@@ -18,5 +21,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         dialogue = GameObject.Find("DialogueManager").GetComponent<DialogueManager>();
+        planeShopManager = GameObject.Find("PlaneShopManager").GetComponent<PlaneShopManager>();
     }
 }

@@ -19,7 +19,7 @@ public class PlaneController : MonoBehaviour
 
     FlappyGameManager flappyGameManager;
 
-    private void Start()
+    public void Init()
     {
         flappyGameManager = FlappyGameManager.Instance;
 
