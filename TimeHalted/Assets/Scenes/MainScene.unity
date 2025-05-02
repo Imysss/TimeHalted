@@ -5339,7 +5339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcName: "\uB8E8\uBA58\uD2B8"
-  npcId: npc_guard
+  npcId: npc_lument
   npcsprite: {fileID: 21300000, guid: 506d52b9f9b736c44b80e108cf5422fb, type: 3}
   dialogueIndex: 0
 --- !u!1 &1767030312
