@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class UI_Dialogue : MonoBehaviour
 {
     [SerializeField] private Image npcImage;
+    [SerializeField] private TextMeshProUGUI npcNameText;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private Button nextButton;
     [SerializeField] private float typingSpeed = 0.05f;
@@ -17,10 +18,12 @@ public class UI_Dialogue : MonoBehaviour
     public void Init(NpcController npc)
     {
         npcImage = transform.Find("NPCImage").GetComponent<Image>();
+        npcNameText = transform.Find("DialogueBox/NPCName").GetComponent<TextMeshProUGUI>();
         dialogueText = transform.Find("DialogueBox/DialogueText").GetComponent<TextMeshProUGUI>();
         nextButton = transform.Find("DialogueBox/NextButton").GetComponent<Button>();
 
-        npcImage.sprite = npc.npcsprite;
+        npcImage.sprite = npc.NpcSprite;
+        npcNameText.text = npc.NpcName;
     }
 
     public void SetNextButtonActive(bool isActive)

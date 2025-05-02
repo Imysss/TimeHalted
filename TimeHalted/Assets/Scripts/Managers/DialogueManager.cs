@@ -8,9 +8,11 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private int currentLine = 0;    //현재 대사 인덱스
 
     [SerializeField] public UI_Dialogue dialogueUI;
+    [SerializeField] public DialogueDatabase dialogueDatabase;
 
     private void Start()
     {
+        dialogueDatabase = GetComponent<DialogueDatabase>();
         dialogueUI.gameObject.SetActive(false);
     }
 
@@ -18,7 +20,8 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueUI.gameObject.SetActive(true);
         dialogueUI.Init(npc);
-        StartDialogue(npc.lines);
+        StartDialogue(dialogueDatabase.GetDialogue(npc.NpcId, npc.DialogueIndex));
+        npc.AdvanceDialogue();
     }
 
     public void StartDialogue(string[] lines)

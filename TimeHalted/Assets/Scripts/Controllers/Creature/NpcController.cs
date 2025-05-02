@@ -4,26 +4,19 @@ using UnityEngine;
 
 public class NpcController : MonoBehaviour
 {
-    public string npcName = "루멘트";
-    public Sprite npcsprite;
+    [SerializeField] private string npcName = "루멘트";     //npc 이름
+    public string NpcName {  get { return npcName; } }
+    [SerializeField] private string npcId = "npc_lument";   //npc id
+    public string NpcId { get { return npcId; } }
+    [SerializeField] private Sprite npcsprite;              //npc sprite
+    public Sprite NpcSprite { get { return npcsprite; } }
+    [SerializeField] private int dialogueIndex = 0;         //대화 index
+    public int DialogueIndex { get { return dialogueIndex; } }
 
-    public string[] lines = new string[]
+    public void AdvanceDialogue()
     {
-        "오... 그래. 너구나....",
-        "마침내... 이곳에 또 하나의 '움직이는 시간'이 찾아왔구먼.",
-        "여긴 '루멘타 마을'.",
-        "오래전엔 웃음이 흐르던 곳이었지... 하지만 지금은... 보이겠지?",
-        "모두 멈췄네. 사람도, 바람도, 종소리도.",
-        "이 시계탑의 바늘이 마지막으로 움직인 게 언제였는지... 나도 모르겠군.",
-        "나는... 그 시간을 지키던 자였다네.",
-        "그러나 시간이 멈추면 나도... 마법도... 허망한 기억에 불과하지.",
-        "하지만... 너는 다르다. 너에겐 아직 '현재'가 흐르고 있지.",
-        "이 멈춘 세계를... 다시 움직이게 만들 힘이 있을지도 몰라.",
-        "(주문서를 꺼내 건넨다.)",
-        "이 마을 어딘가에 흩어진 '시간의 조각'들을 모으게.",
-        "퍼즐을 풀고, 잊힌 기억을 다시 불러오게.",
-        "마을의 시간은... 조각조각 나버렸거든.",
-        "만약 네가 그 흐름을 되찾는다면...",
-        "이 마을도, 나도... 다시 한 번 눈을 뜰 수 있을 게야"
-    };
+        int totalStages=GameManager.Instance.DialogueManager.dialogueDatabase.GetDialogueCount(npcId);
+        if (dialogueIndex < totalStages - 1)
+            dialogueIndex++;
+    }
 }
