@@ -90,6 +90,6 @@ public class PlayerController : CreatureController
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        gameManager.UIManager.ChangeState(UIState.None);
+        gameManager.UIManager.SetPressSpaceActiveFalse();
     }
 }

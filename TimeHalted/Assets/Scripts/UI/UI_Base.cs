@@ -16,6 +16,6 @@ public abstract class UI_Base : MonoBehaviour
 
     public void SetActive(UIState state)
     {
-        gameObject.SetActive(GetUIState() == state);
+        gameObject?.SetActive(GetUIState() == state);
     }
 }

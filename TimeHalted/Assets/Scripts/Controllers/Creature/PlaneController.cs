@@ -12,6 +12,7 @@ public class PlaneController : MonoBehaviour
     private float forwardSpeed = 3f;
 
     private bool isDead = false;
+    public bool IsDead { get { return isDead; } }
 
     [SerializeField] private bool isFlap = false;
 

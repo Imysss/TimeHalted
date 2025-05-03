@@ -66,10 +66,10 @@ public class GameManager : MonoBehaviour
         planeShopManager = transform.Find("PlaneShopManager").GetComponent<PlaneShopManager>();
         uiManager = transform.Find("UIManager").GetComponent<UIManager>();
 
+        LoadMainGame();
+
         PurchasePlane(PlaneType.Blue);
         SelectPlane(PlaneType.Blue);
-
-        ChangeGameMode(GameMode.Main);
     }
 
     void OnSceneLoaded(Scene scene)
@@ -93,7 +93,6 @@ public class GameManager : MonoBehaviour
     public void ChangeGameMode(GameMode mode)
     {
         gameMode = mode;
-        uiManager.Init();
     }
 
     IEnumerator LoadScene(string sceneName)
@@ -106,9 +105,13 @@ public class GameManager : MonoBehaviour
             GameStop();
             ChangeGameMode(GameMode.FlappyBird);
             InitFlappyGame();
+            uiManager.Init();
         }
         else if (sceneName == "MainScene")
+        {
             ChangeGameMode(GameMode.Main);
+            uiManager.Init();
+        }
 
         CameraController camera = GameObject.Find("Main Camera").GetComponent<CameraController>();
         camera.Init();
@@ -129,6 +132,7 @@ public class GameManager : MonoBehaviour
     {
         if (!purchasedPlanes.Contains(type))
         {
+            uiManager.UpdateMainGameUI();
             purchasedPlanes.Add(type);
         }
     }
@@ -157,6 +161,7 @@ public class GameManager : MonoBehaviour
     {
         //최고 점수 가져오기
         flappyBestScore = PlayerPrefs.GetInt(BestScoreKey, 0);
+        flappyScore = 0;
 
         GameObject planePrefab = planeShopManager.GetPlanePrefab(selectedPlane);
         //선택한 plane 가져오기

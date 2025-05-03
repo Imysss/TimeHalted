@@ -40,7 +40,7 @@ public class ObstacleController : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         PlaneController plane = collision.GetComponent<PlaneController>();
-        if (plane != null)
+        if (plane != null && !plane.IsDead)
         {
             gameManager.AddFlappyScore(1);
             gameManager.AddPoint(10);
