@@ -75,6 +75,9 @@ public class UIManager : MonoBehaviour
     {
         currentState = state;
 
+        if (currentState == UIState.PlaneShop)
+            planeShopUI.SetButtonActive();
+
         flappyHomeUI?.SetActive(currentState);
         flappyGameUI?.SetActive(currentState);
         flappyScoreUI?.SetActive(currentState);
@@ -103,7 +106,7 @@ public class UIManager : MonoBehaviour
 
     public void ChangeMainScene()
     {
-        SceneManager.LoadScene("MainScene");
+        GameManager.Instance.LoadMainGame();
     }
     #endregion
 

@@ -10,9 +10,9 @@ public class CameraController : MonoBehaviour
     private float offsetX;
     private float offsetY;
 
-    private bool isFlappyGame = false;
+    [SerializeField] private bool isFlappyGame = false;
 
-    private void Start()
+    public void Init()
     {
         if (target == null)
             return;
@@ -20,13 +20,14 @@ public class CameraController : MonoBehaviour
         offsetX = transform.position.x - target.position.x;
         offsetY = transform.position.y - target.position.y;
 
-        if (GameObject.Find("FlappyGameManager") == null)
+        Debug.Log("flappy bird check");
+        if (GameManager.Instance.GameMode == GameMode.FlappyBird)
         {
-            isFlappyGame = false;
+            isFlappyGame = true;
         }
         else
         {
-            isFlappyGame = true;
+            isFlappyGame = false;
         }
     }
 

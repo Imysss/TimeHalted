@@ -695,7 +695,7 @@ GameObject:
   - component: {fileID: 444355512}
   - component: {fileID: 444355511}
   m_Layer: 5
-  m_Name: RedPlaneEquipButton
+  m_Name: YellowPlaneEquipButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -929,8 +929,8 @@ RectTransform:
   m_Children:
   - {fileID: 1773022171}
   - {fileID: 244516083}
-  - {fileID: 1768245002}
   - {fileID: 930747423}
+  - {fileID: 1768245002}
   m_Father: {fileID: 248298273}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1778,9 +1778,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88a378c5b3d5c50428b06395b3067316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  redPlanePerchaseButton: {fileID: 0}
-  yellowPlanePerchaseButton: {fileID: 0}
-  greenPlanePerchaseButton: {fileID: 0}
+  redPlanePurchaseButton: {fileID: 0}
+  yellowPlanePurchaseButton: {fileID: 0}
+  greenPlanePurchaseButton: {fileID: 0}
   redPlaneEquipButton: {fileID: 0}
   yellowPlaneEquipButton: {fileID: 0}
   greenPlaneEquipButton: {fileID: 0}
@@ -2548,8 +2548,7 @@ MonoBehaviour:
   gameMode: 0
   flappyScore: 0
   flappyBestScore: 0
-  purchasedPlanePrefab: []
-  selectedPlanePrefab: {fileID: 2139886122875726748, guid: 7dee2cc2c4be98648bdf1525907eaad3, type: 3}
+  selectedPlane: 0
 --- !u!4 &755522828
 Transform:
   m_ObjectHideFlags: 0
@@ -3634,7 +3633,7 @@ GameObject:
   - component: {fileID: 1133494994}
   - component: {fileID: 1133494993}
   m_Layer: 5
-  m_Name: RedPlanePerchaseButton
+  m_Name: GreenPlanePurchaseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4413,7 +4412,7 @@ GameObject:
   - component: {fileID: 1298296286}
   - component: {fileID: 1298296285}
   m_Layer: 5
-  m_Name: RedPlaneEquipButton
+  m_Name: GreenPlaneEquipButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5352,8 +5351,8 @@ RectTransform:
   m_Children:
   - {fileID: 1740242133}
   - {fileID: 530638191}
-  - {fileID: 1870846673}
   - {fileID: 444355510}
+  - {fileID: 1870846673}
   m_Father: {fileID: 248298273}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -7999,7 +7998,7 @@ GameObject:
   - component: {fileID: 1768245004}
   - component: {fileID: 1768245003}
   m_Layer: 5
-  m_Name: RedPlanePerchaseButton
+  m_Name: RedPlanePurchaseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9214,7 +9213,7 @@ GameObject:
   - component: {fileID: 1870846675}
   - component: {fileID: 1870846674}
   m_Layer: 5
-  m_Name: RedPlanePerchaseButton
+  m_Name: YellowPlanePurchaseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9486,8 +9485,8 @@ RectTransform:
   m_Children:
   - {fileID: 758547633}
   - {fileID: 1935946675}
-  - {fileID: 1133494992}
   - {fileID: 1298296284}
+  - {fileID: 1133494992}
   m_Father: {fileID: 248298273}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

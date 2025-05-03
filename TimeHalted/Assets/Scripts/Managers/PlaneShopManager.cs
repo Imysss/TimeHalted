@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum PlaneType
 {
+    None,
     Red,
     Yellow,
     Green,
@@ -23,5 +24,10 @@ public class PlaneShopManager : MonoBehaviour
     public void OpenShop()
     {
         uiManager.ChangeState(UIState.PlaneShop);
+    }
+
+    public GameObject GetPlanePrefab(PlaneType type)
+    {
+        return planePrefabs[(int)type];
     }
 }

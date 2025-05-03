@@ -7,9 +7,9 @@ using UnityEngine.UI;
 
 public class UI_PlaneShop : UI_Base
 {
-    [SerializeField] private Button redPlanePerchaseButton;
-    [SerializeField] private Button yellowPlanePerchaseButton;
-    [SerializeField] private Button greenPlanePerchaseButton;
+    [SerializeField] private Button redPlanePurchaseButton;
+    [SerializeField] private Button yellowPlanePurchaseButton;
+    [SerializeField] private Button greenPlanePurchaseButton;
 
     [SerializeField] private Button redPlaneEquipButton;
     [SerializeField] private Button yellowPlaneEquipButton;
@@ -17,14 +17,16 @@ public class UI_PlaneShop : UI_Base
 
     [SerializeField] private Button exitButton;
 
+    private GameManager gameManager;
 
     public override void Init(UIManager uiManager)
     {
         base.Init(uiManager);
+        gameManager = GameManager.Instance;
 
-        redPlanePerchaseButton = transform.Find("Panel/RedPlane/RedPlanePerchaseButton").GetComponent<Button>();
-        yellowPlanePerchaseButton = transform.Find("Panel/YellowPlane/YellowPlanePerchaseButton").GetComponent<Button>();
-        greenPlanePerchaseButton = transform.Find("Panel/GreenPlane/GreenPlanePerchaseButton").GetComponent<Button>();
+        redPlanePurchaseButton = transform.Find("Panel/RedPlane/RedPlanePurchaseButton").GetComponent<Button>();
+        yellowPlanePurchaseButton = transform.Find("Panel/YellowPlane/YellowPlanePurchaseButton").GetComponent<Button>();
+        greenPlanePurchaseButton = transform.Find("Panel/GreenPlane/GreenPlanePurchaseButton").GetComponent<Button>();
 
         redPlaneEquipButton = transform.Find("Panel/RedPlane/RedPlaneEquipButton").GetComponent<Button>();
         yellowPlaneEquipButton = transform.Find("Panel/YellowPlane/YellowPlaneEquipButton").GetComponent<Button>();
@@ -32,17 +34,56 @@ public class UI_PlaneShop : UI_Base
 
         exitButton = transform.Find("Panel/ExitButton").GetComponent<Button>();
 
+
+        redPlanePurchaseButton.onClick.AddListener(() => OnClickPurchaseButton(PlaneType.Red));
+        yellowPlanePurchaseButton.onClick.AddListener(() => OnClickPurchaseButton(PlaneType.Yellow));
+        greenPlanePurchaseButton.onClick.AddListener(() => OnClickPurchaseButton(PlaneType.Green));
+
+        redPlaneEquipButton.onClick.AddListener(() => OnClickEquipButton(PlaneType.Red));
+        yellowPlaneEquipButton.onClick.AddListener(() => OnClickEquipButton(PlaneType.Yellow));
+        greenPlaneEquipButton.onClick.AddListener(() => OnClickEquipButton(PlaneType.Green));
         exitButton.onClick.AddListener(OnClickExitButton);
+
+        SetButtonActive();
     }
 
-    public void SetPerchaseButton()
+    public void SetButtonActive()
     {
+        //구매 버튼 비활성화
+        if (gameManager.IsPurchased(PlaneType.Red))
+            redPlanePurchaseButton.gameObject.SetActive(false);
+        if (gameManager.IsPurchased(PlaneType.Yellow))
+            yellowPlanePurchaseButton.gameObject.SetActive(false);
+        if (gameManager.IsPurchased(PlaneType.Green))
+            greenPlanePurchaseButton.gameObject.SetActive(false);
 
+        //선택 버튼 활성화/비활성화
+        if (gameManager.SelectedPlane == PlaneType.Red)
+            redPlaneEquipButton.interactable = false;
+        else
+            redPlaneEquipButton.interactable = true;
+
+        if (gameManager.SelectedPlane == PlaneType.Yellow)
+            yellowPlaneEquipButton.interactable = false;
+        else
+            yellowPlaneEquipButton.interactable = true;
+
+        if (gameManager.SelectedPlane == PlaneType.Green)
+            greenPlaneEquipButton.interactable = false;
+        else
+            greenPlaneEquipButton.interactable = true;
     }
 
-    public void SetEquipButton()
+    public void OnClickPurchaseButton(PlaneType type)
     {
+        gameManager.PurchasePlane(type);
+        SetButtonActive();
+    }
 
+    public void OnClickEquipButton(PlaneType type)
+    {
+        gameManager.SelectPlane(type);
+        SetButtonActive();
     }
 
     public void OnClickExitButton()

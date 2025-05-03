@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -37,8 +38,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private const string BestScoreKey = "FlappyBestScore";
 
     //구매, 선택한 비행기 프리팹
-    [SerializeField] GameObject[] purchasedPlanePrefab;
-    [SerializeField] GameObject selectedPlanePrefab;
+    [SerializeField] HashSet<PlaneType> purchasedPlanes = new HashSet<PlaneType>();
+    [SerializeField] PlaneType selectedPlane;
+    [SerializeField] public PlaneType SelectedPlane { get { return selectedPlane; } }
 
     private void Awake()
     {
@@ -60,7 +62,17 @@ public class GameManager : MonoBehaviour
         planeShopManager = transform.Find("PlaneShopManager").GetComponent<PlaneShopManager>();
         uiManager = transform.Find("UIManager").GetComponent<UIManager>();
 
+        selectedPlane = PlaneType.None;
+
         ChangeGameMode(GameMode.Main);
+    }
+
+    void OnSceneLoaded(Scene scene)
+    {
+        foreach (GameObject obj in scene.GetRootGameObjects())
+        {
+            obj.SetActive(true); // 최상위 오브젝트만. 자식 오브젝트는 따로 확인 필요
+        }
     }
 
     public void GameStop()
@@ -73,20 +85,67 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1.0f;
     }
 
-    public void FlappyGameStart()
+    public void ChangeGameMode(GameMode mode)
     {
-        StartCoroutine(LoadScene("FlappyBirdScene"));
+        gameMode = mode;
+        uiManager.Init();
     }
 
     IEnumerator LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
         yield return null;
-        GameStop();
+        OnSceneLoaded(SceneManager.GetActiveScene());
         if (sceneName == "FlappyBirdScene")
+        {
+            GameStop();
             ChangeGameMode(GameMode.FlappyBird);
+            InitFlappyGame();
+        }
         else if (sceneName == "MainScene")
             ChangeGameMode(GameMode.Main);
+
+        CameraController camera = GameObject.Find("Main Camera").GetComponent<CameraController>();
+        camera.Init();
+    }
+
+    #region Shop
+    public bool IsPurchased(PlaneType type)
+    {
+        return purchasedPlanes.Contains(type);
+    }
+
+    public bool IsSelected(PlaneType type)
+    {
+        return selectedPlane == type;
+    }
+
+    public void PurchasePlane(PlaneType type)
+    {
+        if (!purchasedPlanes.Contains(type))
+        {
+            purchasedPlanes.Add(type);
+        }
+    }
+
+    public void SelectPlane(PlaneType type)
+    {
+        if(IsPurchased(type))
+        {
+            selectedPlane = type;
+        }
+    }
+    #endregion
+
+    #region Flappy Game
+    public void FlappyGameStart()
+    {
+        StartCoroutine(LoadScene("FlappyBirdScene"));
+    }
+
+    public void LoadMainGame()
+    {
+        StartCoroutine(LoadScene("MainScene"));
     }
 
     public void InitFlappyGame()
@@ -94,11 +153,12 @@ public class GameManager : MonoBehaviour
         //최고 점수 가져오기
         flappyBestScore = PlayerPrefs.GetInt(BestScoreKey, 0);
 
-        //선택한 비행기 가져오기
-        if (selectedPlanePrefab != null)
+        GameObject planePrefab = planeShopManager.GetPlanePrefab(selectedPlane);
+        //선택한 plane 가져오기
+        if (planePrefab != null)
         {
             GameObject plane = GameObject.Find("Plane");
-            GameObject instance = Instantiate(selectedPlanePrefab, plane.transform);
+            GameObject instance = Instantiate(planePrefab, plane.transform);
             instance.transform.localPosition = Vector3.zero;
             plane.GetComponent<PlaneController>().Init();
         }
@@ -107,7 +167,7 @@ public class GameManager : MonoBehaviour
     public void FlappyGameOver()
     {
         UpdateFlappyScore();
-        uiManager.ChangeState(UIState.FlappyGame);
+        uiManager.ChangeState(UIState.FlappyScore);
     }
 
     public void AddFlappyScore(int score)
@@ -127,12 +187,6 @@ public class GameManager : MonoBehaviour
 
         uiManager.UpdateScoreUI(flappyScore, flappyBestScore);
     }
-
-    public void ChangeGameMode(GameMode mode)
-    {
-        gameMode = mode;
-        uiManager.Init();
-    }
-
+    #endregion
 
 }
