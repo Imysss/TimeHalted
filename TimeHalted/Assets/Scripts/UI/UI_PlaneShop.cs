@@ -76,8 +76,27 @@ public class UI_PlaneShop : UI_Base
 
     public void OnClickPurchaseButton(PlaneType type)
     {
-        gameManager.PurchasePlane(type);
-        SetButtonActive();
+        int needPoint = 9999;
+        switch(type)
+        {
+            case PlaneType.Red:
+                needPoint = 50;
+                break;
+            case PlaneType.Yellow:
+                needPoint = 100;
+                break;
+            case PlaneType.Green:
+                needPoint = 200;
+                break;
+        }
+        if (needPoint <= gameManager.Point)
+        {
+            gameManager.AddPoint(-needPoint);
+            gameManager.PurchasePlane(type);
+            SetButtonActive();
+        }
+        else
+            Debug.Log("포인트 부족!");
     }
 
     public void OnClickEquipButton(PlaneType type)

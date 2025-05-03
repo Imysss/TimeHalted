@@ -2550,6 +2550,7 @@ MonoBehaviour:
   flappyScore: 0
   flappyBestScore: 0
   selectedPlane: 0
+  point: 0
 --- !u!4 &755522828
 Transform:
   m_ObjectHideFlags: 0

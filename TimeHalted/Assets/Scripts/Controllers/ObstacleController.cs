@@ -43,6 +43,7 @@ public class ObstacleController : MonoBehaviour
         if (plane != null)
         {
             gameManager.AddFlappyScore(1);
+            gameManager.AddPoint(10);
         }
     }
 }

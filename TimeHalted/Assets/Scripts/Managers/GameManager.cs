@@ -42,6 +42,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] PlaneType selectedPlane;
     [SerializeField] public PlaneType SelectedPlane { get { return selectedPlane; } }
 
+    //Point ¿˙¿Â
+    [SerializeField] private int point = 0;
+    [SerializeField] public int Point { get { return point; } }
+
     private void Awake()
     {
         if (instance != this && instance != null)
@@ -187,6 +191,11 @@ public class GameManager : MonoBehaviour
         }
 
         uiManager.UpdateScoreUI(flappyScore, flappyBestScore);
+    }
+
+    public void AddPoint(int point)
+    {
+        this.point += point;
     }
     #endregion
 

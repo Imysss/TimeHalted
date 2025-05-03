@@ -29,7 +29,6 @@ public class PlayerController : CreatureController
             NpcController npcController = npc.GetComponent<NpcController>();
             if (npcController.NPCType == NPCType.Talk)
             {
-                Debug.Log("NPC Talk");
                 gameManager.DialogueManager.ShowDialogueUI(npcController);
             }
             else if (npcController.NPCType == NPCType.Shop)
