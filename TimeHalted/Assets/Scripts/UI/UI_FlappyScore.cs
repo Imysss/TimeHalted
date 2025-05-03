@@ -5,15 +5,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UI_Score : BaseUI
+public class UI_FlappyScore : BaseUI
 {
     [SerializeField] private TextMeshProUGUI currentScoreText;
     [SerializeField] private TextMeshProUGUI bestScoreText;
     [SerializeField] private Button exitButton;
 
-    public override void Init(UIManager uiManager)
+    public override void Init(UI_FlappyBird uiFlappyBird)
     {
-        base.Init(uiManager);
+        base.Init(uiFlappyBird);
 
         currentScoreText = transform.Find("Panel/CurrentScoreText").GetComponent<TextMeshProUGUI>();
         bestScoreText = transform.Find("Panel/BestScoreText").GetComponent <TextMeshProUGUI>();
@@ -22,9 +22,9 @@ public class UI_Score : BaseUI
         exitButton.onClick.AddListener(OnClickExitButton);
     }
 
-    protected override UIState GetUIState()
+    protected override FlappyState GetUIState()
     {
-        return UIState.Score;
+        return FlappyState.Score;
     }
 
     public void SetUI(int score, int bestScore)
@@ -35,6 +35,6 @@ public class UI_Score : BaseUI
 
     public void OnClickExitButton()
     {
-        SceneManager.LoadScene("MainScene");
+        uiFlappyBird.ChangeScene();
     }
 }

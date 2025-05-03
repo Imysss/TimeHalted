@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class UI_Game : BaseUI
+public class UI_FlappyGame : BaseUI
 {
     [SerializeField] private TextMeshProUGUI scoreText;
 
-    public override void Init(UIManager uiManager)
+    public override void Init(UI_FlappyBird flappyBird)
     {
-        base.Init(uiManager);
+        base.Init(flappyBird);
 
         scoreText = transform.Find("ScoreText").GetComponent<TextMeshProUGUI>();
     }
 
-    protected override UIState GetUIState()
+    protected override FlappyState GetUIState()
     {
-        return UIState.Game;
+        return FlappyState.Game;
     }
 
     public void UpdateScoreText(int score)

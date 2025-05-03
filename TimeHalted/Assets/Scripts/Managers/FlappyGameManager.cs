@@ -15,6 +15,9 @@ public class FlappyGameManager : MonoBehaviour
     [SerializeField] private const string BestScoreKey = "FlappyBestScore";
 
     [SerializeField] GameObject selectedPlanePrefab;
+
+    [SerializeField] UI_FlappyBird uiFlappyBird;
+
     private void Awake()
     {
         instance = this;
@@ -23,6 +26,10 @@ public class FlappyGameManager : MonoBehaviour
 
     private void Start()
     {
+        //UI 가져오기
+        uiFlappyBird = GameObject.Find("UI_FlappyBird").GetComponent<UI_FlappyBird>();
+
+        //최고 점수 가져오기
         flappyBestScore = PlayerPrefs.GetInt(BestScoreKey, 0);
 
         //선택한 비행기 가져오기
@@ -44,13 +51,13 @@ public class FlappyGameManager : MonoBehaviour
     public void GameOver()
     {
         UpdateScore();
-        UIManager.Instance.ChangeState(UIState.Score);
+        uiFlappyBird.ChangeState(FlappyState.Score);
     }
 
     public void AddScore(int score)
     {
         currentScore += score;
-        UIManager.Instance.ChangeScore(currentScore);
+        uiFlappyBird.ChangeScore(currentScore);
     }
 
     public void UpdateScore()
@@ -62,6 +69,6 @@ public class FlappyGameManager : MonoBehaviour
             PlayerPrefs.SetInt(BestScoreKey, flappyBestScore);
         }
 
-        UIManager.Instance.UpdateScore(currentScore, flappyBestScore);
+        uiFlappyBird.UpdateScore(currentScore, flappyBestScore);
     }
 }

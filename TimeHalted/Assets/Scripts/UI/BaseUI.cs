@@ -5,15 +5,16 @@ using UnityEngine;
 
 public abstract class BaseUI : MonoBehaviour
 {
-    protected UIManager uiManager;
+    protected UI_FlappyBird uiFlappyBird;
 
-    public virtual void Init(UIManager uiManager)
+    public virtual void Init(UI_FlappyBird uiFlappyBird)
     {
-        this.uiManager = uiManager;
+        this.uiFlappyBird = uiFlappyBird;
     }
 
-    protected abstract UIState GetUIState();
-    public void SetActive(UIState state)
+    protected abstract FlappyState GetUIState();
+
+    public void SetActive(FlappyState state)
     {
         gameObject.SetActive(GetUIState() == state);
     }

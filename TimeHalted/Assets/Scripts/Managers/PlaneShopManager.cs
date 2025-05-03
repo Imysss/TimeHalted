@@ -11,6 +11,7 @@ public enum PlaneType
 public class PlaneShopManager : MonoBehaviour
 {
     public GameObject[] planePrefabs;
+    //public GameObject 
 
     public void SelectPlane(PlaneType type)
     {
