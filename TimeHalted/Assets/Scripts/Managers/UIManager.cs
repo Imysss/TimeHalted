@@ -94,12 +94,12 @@ public class UIManager : MonoBehaviour
         pressSpaceUI?.SetActive(currentState);
     }
 
+    #region Flappy UI
     public void UpdateScoreUI(int score, int bestScore)
     {
         flappyScoreUI.SetUI(score, bestScore);
     }
 
-    #region Flappy UI
     public void StartFlappyGame()
     {
         ChangeState(UIState.FlappyGame);
