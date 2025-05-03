@@ -20,7 +20,6 @@ public class CameraController : MonoBehaviour
         offsetX = transform.position.x - target.position.x;
         offsetY = transform.position.y - target.position.y;
 
-        Debug.Log("flappy bird check");
         if (GameManager.Instance.GameMode == GameMode.FlappyBird)
         {
             isFlappyGame = true;

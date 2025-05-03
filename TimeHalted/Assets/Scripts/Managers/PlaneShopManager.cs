@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum PlaneType
 {
-    None,
+    Blue,
     Red,
     Yellow,
     Green,

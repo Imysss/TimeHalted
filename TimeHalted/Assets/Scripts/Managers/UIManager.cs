@@ -43,7 +43,6 @@ public class UIManager : MonoBehaviour
 
         if (gameMode == GameMode.Main)
         {
-            Debug.Log("UIManager Init: GameMode - main");
             dialogueUI = GameObject.Find("UI_Dialogue").GetComponent<UI_Dialogue>();
             dialogueUI?.Init(this);
 
@@ -57,7 +56,6 @@ public class UIManager : MonoBehaviour
         }
         else if (gameMode == GameMode.FlappyBird)
         {
-            Debug.Log("UIManager Init: GameMode - flappyBird");
             flappyHomeUI = GameObject.Find("UI_FlappyHome").GetComponent<UI_FlappyHome>();
             flappyHomeUI?.Init(this);
 
@@ -130,10 +128,5 @@ public class UIManager : MonoBehaviour
     {
         dialogueUI.ShowLine(line);
     }
-    #endregion
-
-    #region Shop UI
-
-
     #endregion
 }

@@ -93,20 +93,4 @@ public class CreatureController : MonoBehaviour
             weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ);
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag.Equals("FlappyGame"))
-        {
-            Debug.Log("Flappy Game으로 이동");
-        }
-        else if (collision.gameObject.tag.Equals("StackGame"))
-        {
-            Debug.Log("Stack Game으로 이동");
-        }
-        else if (collision.gameObject.tag.Equals("ShootingGame"))
-        {
-            Debug.Log("Shooting Game으로 이동");
-        }
-    }
 }

@@ -9,7 +9,6 @@ public class PlayerController : CreatureController
     private new Camera camera;
     private float detectionRadius = 1.5f;
     [SerializeField] private LayerMask npcLayer;
-    [SerializeField] public GameObject UI_PressSpace;
 
     GameManager gameManager;
 
@@ -20,8 +19,6 @@ public class PlayerController : CreatureController
         npcLayer = LayerMask.GetMask("NPC");
 
         gameManager = GameManager.Instance;
-
-        UI_PressSpace.SetActive(false);
     }
 
     public void Interact()
@@ -39,7 +36,6 @@ public class PlayerController : CreatureController
             {
                 gameManager.PlaneShopManager.OpenShop();
             }
-            UI_PressSpace.SetActive(false);
         }
     }
 
@@ -89,13 +85,12 @@ public class PlayerController : CreatureController
         }
         else if(collision.gameObject.CompareTag("NPC"))
         {
-            UI_PressSpace.SetActive(true);
+            gameManager.UIManager.ChangeState(UIState.PressSpace);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (UI_PressSpace != null)
-            UI_PressSpace.SetActive(false);
+        gameManager.UIManager.ChangeState(UIState.None);
     }
 }

@@ -1044,6 +1044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 6803054446887611596}
+  isFlappyGame: 0
 --- !u!1 &520950137
 GameObject:
   m_ObjectHideFlags: 0
@@ -2874,6 +2875,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planePrefabs:
+  - {fileID: 2139886122875726748, guid: b6ef8b6d2d17edd43b12a7d18fbefa0e, type: 3}
   - {fileID: 2139886122875726748, guid: 8504784ea0cae8e4c8940c1a81c3fa9b, type: 3}
   - {fileID: 2139886122875726748, guid: 7bbb67fffebf2e24caf99421c7348be6, type: 3}
   - {fileID: 2139886122875726748, guid: 7dee2cc2c4be98648bdf1525907eaad3, type: 3}
@@ -9543,7 +9545,6 @@ MonoBehaviour:
   npcLayer:
     serializedVersion: 2
     m_Bits: 0
-  UI_PressSpace: {fileID: 1612355610}
 --- !u!4 &310236569016938224
 Transform:
   m_ObjectHideFlags: 0

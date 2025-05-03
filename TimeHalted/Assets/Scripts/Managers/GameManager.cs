@@ -62,7 +62,8 @@ public class GameManager : MonoBehaviour
         planeShopManager = transform.Find("PlaneShopManager").GetComponent<PlaneShopManager>();
         uiManager = transform.Find("UIManager").GetComponent<UIManager>();
 
-        selectedPlane = PlaneType.None;
+        PurchasePlane(PlaneType.Blue);
+        SelectPlane(PlaneType.Blue);
 
         ChangeGameMode(GameMode.Main);
     }
