@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_Dialogue : MonoBehaviour
+public class UI_Dialogue : UI_Base
 {
     [SerializeField] private Image npcImage;
     [SerializeField] private TextMeshProUGUI npcNameText;
@@ -15,16 +15,22 @@ public class UI_Dialogue : MonoBehaviour
 
     private Coroutine typingCoroutine;
 
-    public void Init(NpcController npc)
+    public override void Init(UIManager uiManager)
     {
+        base.Init(uiManager);
+
         npcImage = transform.Find("NPCImage").GetComponent<Image>();
         npcNameText = transform.Find("DialogueBox/NPCName").GetComponent<TextMeshProUGUI>();
         dialogueText = transform.Find("DialogueBox/DialogueText").GetComponent<TextMeshProUGUI>();
         nextButton = transform.Find("DialogueBox/NextButton").GetComponent<Button>();
+    }
 
+    public void SetNpcDialogue(NpcController npc)
+    {
         npcImage.sprite = npc.NpcSprite;
         npcNameText.text = npc.NpcName;
     }
+
 
     public void SetNextButtonActive(bool isActive)
     {
@@ -64,5 +70,10 @@ public class UI_Dialogue : MonoBehaviour
         }
 
         SetNextButtonActive(true);
+    }
+
+    protected override UIState GetUIState()
+    {
+        return UIState.Dialogue;
     }
 }

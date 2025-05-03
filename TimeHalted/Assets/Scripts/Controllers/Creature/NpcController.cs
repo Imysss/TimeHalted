@@ -21,23 +21,10 @@ public class NpcController : MonoBehaviour
     [SerializeField] private NPCType npcType;
     public NPCType NPCType { get { return npcType; } }
 
-    public GameObject planeShopUI;
-
-    bool isFirst = false;
-
     public void AdvanceDialogue()
     {
         int totalStages=GameManager.Instance.DialogueManager.dialogueDatabase.GetDialogueCount(npcId);
         if (dialogueIndex < totalStages - 1)
             dialogueIndex++;
     }
-
-    public void OpenShop()
-    {
-        if (planeShopUI.activeSelf)
-            return;
-        planeShopUI.SetActive(true);
-        planeShopUI.GetComponent<UI_PlaneShop>().Init(GameManager.Instance.PlaneShopManager);
-    }
-
 }

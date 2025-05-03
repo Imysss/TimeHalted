@@ -6,16 +6,20 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : CreatureController
 {
-    private Camera camera;
+    private new Camera camera;
     private float detectionRadius = 1.5f;
     [SerializeField] private LayerMask npcLayer;
     [SerializeField] public GameObject UI_PressSpace;
+
+    GameManager gameManager;
 
     protected override void Start()
     {
         base.Start();
         camera = Camera.main;
         npcLayer = LayerMask.GetMask("NPC");
+
+        gameManager = GameManager.Instance;
 
         UI_PressSpace.SetActive(false);
     }
@@ -28,11 +32,12 @@ public class PlayerController : CreatureController
             NpcController npcController = npc.GetComponent<NpcController>();
             if (npcController.NPCType == NPCType.Talk)
             {
-                GameManager.Instance.DialogueManager.ShowDialogueUI(npc.GetComponent<NpcController>());
+                Debug.Log("NPC Talk");
+                gameManager.DialogueManager.ShowDialogueUI(npcController);
             }
             else if (npcController.NPCType == NPCType.Shop)
             {
-                npcController.OpenShop();
+                gameManager.PlaneShopManager.OpenShop();
             }
             UI_PressSpace.SetActive(false);
         }
@@ -72,7 +77,7 @@ public class PlayerController : CreatureController
     {
         if (collision.gameObject.CompareTag("FlappyGame"))
         {
-            SceneManager.LoadScene("FlappyBirdScene");
+            gameManager.FlappyGameStart();
         }
         else if(collision.gameObject.CompareTag("StackGame"))
         {

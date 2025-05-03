@@ -700,7 +700,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &444355510
 RectTransform:
   m_ObjectHideFlags: 0
@@ -838,7 +838,6 @@ MonoBehaviour:
   npcsprite: {fileID: 21300000, guid: 66a7f1881784a5446857f54130620d53, type: 3}
   dialogueIndex: 0
   npcType: 0
-  planeShopUI: {fileID: 675099315}
 --- !u!61 &508855248
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1779,9 +1778,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88a378c5b3d5c50428b06395b3067316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  redPlaneButton: {fileID: 0}
-  yellowPlaneButton: {fileID: 0}
-  greenPlaneButton: {fileID: 0}
+  redPlanePerchaseButton: {fileID: 0}
+  yellowPlanePerchaseButton: {fileID: 0}
+  greenPlanePerchaseButton: {fileID: 0}
+  redPlaneEquipButton: {fileID: 0}
+  yellowPlaneEquipButton: {fileID: 0}
+  greenPlaneEquipButton: {fileID: 0}
   exitButton: {fileID: 0}
 --- !u!114 &675099317
 MonoBehaviour:
@@ -2543,6 +2545,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85af73e9de0cb894b9ea92c886c322f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameMode: 0
+  flappyScore: 0
+  flappyBestScore: 0
+  purchasedPlanePrefab: []
+  selectedPlanePrefab: {fileID: 2139886122875726748, guid: 7dee2cc2c4be98648bdf1525907eaad3, type: 3}
 --- !u!4 &755522828
 Transform:
   m_ObjectHideFlags: 0
@@ -2555,7 +2562,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1785975793}
+  - {fileID: 829621018}
+  - {fileID: 1249363452}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &758547632
@@ -2876,12 +2886,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 829621016}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 755522828}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &930747422
 GameObject:
@@ -2901,7 +2911,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &930747423
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4218,6 +4228,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1226863961}
   m_CullTransparentMesh: 1
+--- !u!1 &1249363451
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1249363452}
+  - component: {fileID: 1249363453}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1249363452
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249363451}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 755522828}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1249363453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249363451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf9bd1387f892254a867bd6cd249f7f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+  flappyHomeUI: {fileID: 0}
+  flappyGameUI: {fileID: 0}
+  flappyScoreUI: {fileID: 0}
+  dialogueUI: {fileID: 0}
+  planeShopUI: {fileID: 0}
+  pressSpaceUI: {fileID: 0}
 --- !u!1 &1268780065
 GameObject:
   m_ObjectHideFlags: 0
@@ -4357,7 +4418,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1298296284
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7465,13 +7526,14 @@ GameObject:
   - component: {fileID: 1612355613}
   - component: {fileID: 1612355612}
   - component: {fileID: 1612355611}
+  - component: {fileID: 1612355615}
   m_Layer: 5
   m_Name: UI_PressSpace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1612355611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7555,6 +7617,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1612355615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612355610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7a6ad89aa78f3849bae72248ee1c4c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1713264764
 GameObject:
   m_ObjectHideFlags: 0
@@ -7651,7 +7725,6 @@ MonoBehaviour:
   npcsprite: {fileID: 21300000, guid: 506d52b9f9b736c44b80e108cf5422fb, type: 3}
   dialogueIndex: 0
   npcType: 1
-  planeShopUI: {fileID: 0}
 --- !u!1 &1740242132
 GameObject:
   m_ObjectHideFlags: 0
@@ -8141,7 +8214,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueLines: []
   currentLine: 0
-  dialogueUI: {fileID: 80496396167388312}
   dialogueDatabase: {fileID: 0}
 --- !u!4 &1785975793
 Transform:
@@ -8151,12 +8223,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1785975791}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 755522828}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1785975794
 MonoBehaviour:
@@ -9535,7 +9607,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &1747560221558700715
 Rigidbody2D:
   serializedVersion: 4
@@ -9582,7 +9654,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!222 &2811611680968158838
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9767,7 +9839,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 47, y: 321}
+  m_AnchoredPosition: {x: 46.999977, y: 320.99997}
   m_SizeDelta: {x: 300, y: 525}
   m_Pivot: {x: 0, y: 0}
 --- !u!1 &6790230900184913894
@@ -9787,7 +9859,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6803054446887611596
 Transform:
   m_ObjectHideFlags: 0
@@ -10138,6 +10210,4 @@ SceneRoots:
   - {fileID: 1612355614}
   - {fileID: 675099320}
   - {fileID: 755522828}
-  - {fileID: 1785975793}
   - {fileID: 806026587}
-  - {fileID: 829621018}

@@ -17,11 +17,11 @@ public class PlaneController : MonoBehaviour
 
     public bool godMode = false;
 
-    FlappyGameManager flappyGameManager;
+    GameManager gameManager;
 
     public void Init()
     {
-        flappyGameManager = FlappyGameManager.Instance;
+        gameManager = GameManager.Instance;
 
         _anim = GetComponentInChildren<Animator>();
         _rigid = GetComponent<Rigidbody2D>();
@@ -59,7 +59,7 @@ public class PlaneController : MonoBehaviour
         _anim.SetBool("IsDie", true);
         isDead = true;
 
-        flappyGameManager.GameOver();
+        gameManager.FlappyGameOver();
     }
 
     void OnFlap(InputValue inputValue)

@@ -5,53 +5,44 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UI_PlaneShop : MonoBehaviour
+public class UI_PlaneShop : UI_Base
 {
-    [SerializeField] private Button redPlaneButton;
-    [SerializeField] private Button yellowPlaneButton;
-    [SerializeField] private Button greenPlaneButton;
+    [SerializeField] private Button redPlanePerchaseButton;
+    [SerializeField] private Button yellowPlanePerchaseButton;
+    [SerializeField] private Button greenPlanePerchaseButton;
+
+    [SerializeField] private Button redPlaneEquipButton;
+    [SerializeField] private Button yellowPlaneEquipButton;
+    [SerializeField] private Button greenPlaneEquipButton;
 
     [SerializeField] private Button exitButton;
 
-    PlaneShopManager planeShopManager;
 
-    private bool isInitialized = false;
-
-    public void Init(PlaneShopManager planeShopManager)
+    public override void Init(UIManager uiManager)
     {
-        if (isInitialized) return;
+        base.Init(uiManager);
 
-        this.planeShopManager = planeShopManager;
+        redPlanePerchaseButton = transform.Find("Panel/RedPlane/RedPlanePerchaseButton").GetComponent<Button>();
+        yellowPlanePerchaseButton = transform.Find("Panel/YellowPlane/YellowPlanePerchaseButton").GetComponent<Button>();
+        greenPlanePerchaseButton = transform.Find("Panel/GreenPlane/GreenPlanePerchaseButton").GetComponent<Button>();
 
-        redPlaneButton = transform.Find("Panel/RedPlane/RedPlaneButton").GetComponent<Button>();
-        yellowPlaneButton = transform.Find("Panel/YellowPlane/YellowPlaneButton").GetComponent<Button>();
-        greenPlaneButton = transform.Find("Panel/GreenPlane/GreenPlaneButton").GetComponent<Button>();
+        redPlaneEquipButton = transform.Find("Panel/RedPlane/RedPlaneEquipButton").GetComponent<Button>();
+        yellowPlaneEquipButton = transform.Find("Panel/YellowPlane/YellowPlaneEquipButton").GetComponent<Button>();
+        greenPlaneEquipButton = transform.Find("Panel/GreenPlane/GreenPlaneEquipButton").GetComponent<Button>();
+
         exitButton = transform.Find("Panel/ExitButton").GetComponent<Button>();
 
-        redPlaneButton.onClick.AddListener(OnClickRedPlaneButton);
-        yellowPlaneButton.onClick.AddListener(OnClickYellowPlaneButton);
-        greenPlaneButton.onClick.AddListener(OnClickGreenPlaneButton);
         exitButton.onClick.AddListener(OnClickExitButton);
-
-        isInitialized = true;
     }
 
-    public void OnClickRedPlaneButton()
+    public void SetPerchaseButton()
     {
-        planeShopManager.SelectPlane(PlaneType.Red);
-        redPlaneButton.interactable = false;
+
     }
 
-    public void OnClickYellowPlaneButton()
+    public void SetEquipButton()
     {
-        planeShopManager.SelectPlane(PlaneType.Yellow);
-        yellowPlaneButton.interactable = false;
-    }
 
-    public void OnClickGreenPlaneButton()
-    {
-        planeShopManager.SelectPlane(PlaneType.Green);
-        greenPlaneButton.interactable = false;
     }
 
     public void OnClickExitButton()
@@ -59,5 +50,10 @@ public class UI_PlaneShop : MonoBehaviour
         gameObject.SetActive(false);
         //강제로 포커스 해제
         EventSystem.current.SetSelectedGameObject(null);
+    }
+
+    protected override UIState GetUIState()
+    {
+        return UIState.PlaneShop;
     }
 }

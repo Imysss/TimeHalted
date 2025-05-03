@@ -13,9 +13,15 @@ public class PlaneShopManager : MonoBehaviour
     public GameObject[] planePrefabs;
     //public GameObject 
 
-    public void SelectPlane(PlaneType type)
+    private UIManager uiManager;
+
+    private void Start()
     {
-        Debug.Log("select plane");
-        SelectedPlaneData.selectedPlanePrefab = planePrefabs[(int)type];
+        uiManager = GameManager.Instance.UIManager;
+    }
+
+    public void OpenShop()
+    {
+        uiManager.ChangeState(UIState.PlaneShop);
     }
 }

@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_FlappyHome : BaseUI
+public class UI_FlappyHome : UI_Base
 {
     [SerializeField] private Button startButton;
 
-    public override void Init(UI_FlappyBird uiFlappyBird)
+    public override void Init(UIManager uiManager)
     {
-        base.Init(uiFlappyBird);
+        base.Init(uiManager);
 
         startButton = transform.Find("Panel/StartButton").GetComponent<Button>();
         startButton.onClick.AddListener(OnClickStartButton);
     }
 
-    protected override FlappyState GetUIState()
+    protected override UIState GetUIState()
     {
-        return FlappyState.Home;
+        return UIState.FlappyHome;
     }
 
     public void OnClickStartButton()
     {
-        uiFlappyBird.StartGame();
+        uiManager.StartFlappyGame();
     }
 }

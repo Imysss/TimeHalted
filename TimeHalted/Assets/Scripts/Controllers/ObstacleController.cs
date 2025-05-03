@@ -15,11 +15,11 @@ public class ObstacleController : MonoBehaviour
     public Transform topObject;
     public Transform bottomObject;
 
-    private FlappyGameManager flappyGameManager;
+    private GameManager gameManager;
 
     private void Start()
     {
-        flappyGameManager = FlappyGameManager.Instance;
+        gameManager = GameManager.Instance;
     }
 
     public Vector3 SetRandomPlace(Vector3 lastPosition, int obstacleCount)
@@ -42,7 +42,7 @@ public class ObstacleController : MonoBehaviour
         PlaneController plane = collision.GetComponent<PlaneController>();
         if (plane != null)
         {
-            flappyGameManager.AddScore(1);
+            gameManager.AddFlappyScore(1);
         }
     }
 }

@@ -7,19 +7,20 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private string[] dialogueLines; //대사 내용
     [SerializeField] private int currentLine = 0;    //현재 대사 인덱스
 
-    [SerializeField] public UI_Dialogue dialogueUI;
     [SerializeField] public DialogueDatabase dialogueDatabase;
+
+    private UIManager uiManager;
 
     private void Start()
     {
         dialogueDatabase = GetComponent<DialogueDatabase>();
-        dialogueUI.gameObject.SetActive(false);
+        uiManager = GameManager.Instance.UIManager;
     }
 
     public void ShowDialogueUI(NpcController npc)
     {
-        dialogueUI.gameObject.SetActive(true);
-        dialogueUI.Init(npc);
+        uiManager.ChangeState(UIState.Dialogue);
+        uiManager.SetNpcDialogue(npc);
         StartDialogue(dialogueDatabase.GetDialogue(npc.NpcId, npc.DialogueIndex));
         npc.AdvanceDialogue();
     }
@@ -29,8 +30,8 @@ public class DialogueManager : MonoBehaviour
         dialogueLines = lines;
         currentLine = 0;
 
-        dialogueUI.SetNextButtonListener(NextLine);
-        dialogueUI.ClearText();
+        uiManager.SetDialogueNextButtonListener(NextLine);
+        uiManager.ClearDialogueText();
         ShowCurrentLine();
     }
 
@@ -38,7 +39,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (currentLine < dialogueLines.Length) 
         {
-            dialogueUI.ShowLine(dialogueLines[currentLine]);
+            uiManager.ShowDialogueLine(dialogueLines[currentLine]);
         }
     }
 
@@ -57,8 +58,7 @@ public class DialogueManager : MonoBehaviour
 
     private void EndDialogue()
     {
-        dialogueUI.ClearText();
-        //dialogueUI.SetNextButtonActive(false);
-        dialogueUI.gameObject.SetActive(false);
+        uiManager.ClearDialogueText();
+        uiManager.ChangeState(UIState.None);
     }
 }
