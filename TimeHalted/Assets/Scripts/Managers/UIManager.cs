@@ -83,7 +83,9 @@ public class UIManager : MonoBehaviour
         currentState = state;
 
         if (currentState == UIState.PlaneShop)
+        {
             planeShopUI.SetButtonActive();
+        }
 
         flappyHomeUI?.SetActive(currentState);
         flappyGameUI?.SetActive(currentState);
@@ -136,6 +138,13 @@ public class UIManager : MonoBehaviour
     public void ShowDialogueLine(string line)
     {
         dialogueUI.ShowLine(line);
+    }
+    #endregion
+
+    #region ShopUI
+    public void SetNpcShop(NpcController npc)
+    {
+        planeShopUI.SetNpc(npc);
     }
     #endregion
 

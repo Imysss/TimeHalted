@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class UI_PlaneShop : UI_Base
 {
+    [SerializeField] private Image npcImage;
+    [SerializeField] private TextMeshProUGUI npcNameText;
+
     [SerializeField] private Button redPlanePurchaseButton;
     [SerializeField] private Button yellowPlanePurchaseButton;
     [SerializeField] private Button greenPlanePurchaseButton;
@@ -23,6 +26,9 @@ public class UI_PlaneShop : UI_Base
     {
         base.Init(uiManager);
         gameManager = GameManager.Instance;
+
+        npcImage = transform.Find("NPCImage").GetComponent<Image>();
+        npcNameText = transform.Find("Panel/NPCName").GetComponent<TextMeshProUGUI>();
 
         redPlanePurchaseButton = transform.Find("Panel/RedPlane/RedPlanePurchaseButton").GetComponent<Button>();
         yellowPlanePurchaseButton = transform.Find("Panel/YellowPlane/YellowPlanePurchaseButton").GetComponent<Button>();
@@ -45,6 +51,12 @@ public class UI_PlaneShop : UI_Base
         exitButton.onClick.AddListener(OnClickExitButton);
 
         SetButtonActive();
+    }
+
+    public void SetNpc(NpcController npc)
+    {
+        npcImage.sprite = npc.NpcSprite;
+        npcNameText.text = npc.NpcName;
     }
 
     public void SetButtonActive()

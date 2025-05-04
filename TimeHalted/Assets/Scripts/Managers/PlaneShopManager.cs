@@ -21,8 +21,9 @@ public class PlaneShopManager : MonoBehaviour
         uiManager = GameManager.Instance.UIManager;
     }
 
-    public void OpenShop()
+    public void ShowPlaneShopUI(NpcController npc)
     {
+        uiManager.SetNpcShop(npc);
         uiManager.ChangeState(UIState.PlaneShop);
     }
 

@@ -9,7 +9,7 @@ public enum NPCType
 }
 public class NpcController : MonoBehaviour
 {
-    [SerializeField] private string npcName = "∑Á∏‡∆Æ";     //npc ¿Ã∏ß
+    [SerializeField] private string npcName = "[∑Á∏‡∆Æ]";     //npc ¿Ã∏ß
     public string NpcName {  get { return npcName; } }
     [SerializeField] private string npcId = "npc_lument";   //npc id
     public string NpcId { get { return npcId; } }

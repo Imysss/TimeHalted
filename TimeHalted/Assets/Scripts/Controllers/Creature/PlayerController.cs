@@ -33,7 +33,7 @@ public class PlayerController : CreatureController
             }
             else if (npcController.NPCType == NPCType.Shop)
             {
-                gameManager.PlaneShopManager.OpenShop();
+                gameManager.PlaneShopManager.ShowPlaneShopUI(npcController);
             }
         }
     }
