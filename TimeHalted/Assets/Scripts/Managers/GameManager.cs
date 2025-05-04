@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour
     private PlaneShopManager planeShopManager;
     public PlaneShopManager PlaneShopManager { get { return planeShopManager; } }
 
+    private CustomizationManager customizationManager;
+    public CustomizationManager CustomizationManager { get { return customizationManager; } }
+
     private UIManager uiManager;
     public UIManager UIManager { get { return uiManager; } }
 
@@ -64,6 +67,7 @@ public class GameManager : MonoBehaviour
     {
         dialogue = transform.Find("DialogueManager").GetComponent<DialogueManager>();
         planeShopManager = transform.Find("PlaneShopManager").GetComponent<PlaneShopManager>();
+        customizationManager = transform.Find("CustomizationManager").GetComponent<CustomizationManager>();
         uiManager = transform.Find("UIManager").GetComponent<UIManager>();
 
         LoadMainGame();

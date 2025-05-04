@@ -5,6 +5,7 @@ using UnityEngine;
 public enum NPCType
 {
     Shop,
+    Customize,
     Talk,
 }
 public class NpcController : MonoBehaviour

@@ -35,7 +35,7 @@ public class CreatureController : MonoBehaviour
 
     protected virtual void Start()
     {
-
+        _sprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     protected virtual void Update()
