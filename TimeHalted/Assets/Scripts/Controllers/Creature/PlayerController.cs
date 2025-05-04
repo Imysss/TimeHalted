@@ -48,7 +48,9 @@ public class PlayerController : CreatureController
 
     public void SetColor(Color color)
     {
-        _sprite.color = color;
+        Debug.Log("Set Color");
+        Debug.Log(color.ToString());
+        _sprite.material.color = color;
     }
 
     void OnMove(InputValue inputValue)
