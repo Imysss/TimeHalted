@@ -29,24 +29,36 @@ public class CreatureController : MonoBehaviour
 
     protected virtual void Awake()
     {
-        _rigid = GetComponent<Rigidbody2D>();
-        _anim = GetComponentInChildren<Animator>();
+
     }
 
     protected virtual void Start()
     {
-        _sprite = GetComponentInChildren<SpriteRenderer>();
+        _rigid = GetComponent<Rigidbody2D>();
     }
 
     protected virtual void Update()
     {
+        if (_anim == null)
+            return;
+
         HandleAction();
         Rotate(lookDirection);
     }
 
     protected virtual void FixedUpdate()
     {
+        if (_anim == null)
+            return;
+
         Move(moveDirection);
+    }
+
+    public void SetMainSprite()
+    {
+        Debug.Log("SetMainSprite");
+        _anim = GetComponentInChildren<Animator>();
+        _sprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     protected virtual void HandleAction()
@@ -56,6 +68,8 @@ public class CreatureController : MonoBehaviour
 
     public virtual void UpdateAnimation() 
     {
+        if (_anim == null)
+            return;
         switch (CreatureState)
         {
             case Define.CreatureState.Idle:

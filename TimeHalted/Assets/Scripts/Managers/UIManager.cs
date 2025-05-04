@@ -14,6 +14,7 @@ public enum UIState
     PlaneShop,
     PressSpace,
     MainGame,
+    Customization,
 }
 
 public class UIManager : MonoBehaviour
@@ -27,6 +28,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private UI_MainGame mainGameUI;
     [SerializeField] private UI_Dialogue dialogueUI;
     [SerializeField] private UI_PlaneShop planeShopUI;
+    [SerializeField] private UI_Customization customizationUI;
+
     [SerializeField] private UI_PressSpace pressSpaceUI;
 
     GameMode gameMode;
@@ -44,6 +47,8 @@ public class UIManager : MonoBehaviour
         mainGameUI = null;
         dialogueUI = null;
         planeShopUI = null;
+        customizationUI = null;
+
         pressSpaceUI = null;
 
         if (gameMode == GameMode.Main)
@@ -57,6 +62,9 @@ public class UIManager : MonoBehaviour
 
             planeShopUI = GameObject.Find("UI_PlaneShop").GetComponent<UI_PlaneShop>();
             planeShopUI?.Init(this);
+
+            customizationUI = GameObject.Find("UI_Customization").GetComponent<UI_Customization>();
+            customizationUI?.Init(this);
 
             pressSpaceUI = GameObject.Find("UI_PressSpace").GetComponent<UI_PressSpace>();
             pressSpaceUI?.Init(this);
@@ -82,18 +90,28 @@ public class UIManager : MonoBehaviour
     {
         currentState = state;
 
-        if (currentState == UIState.PlaneShop)
+        if (gameMode == GameMode.FlappyBird)
         {
-            planeShopUI.SetButtonActive();
+            flappyHomeUI?.SetActive(currentState);
+            flappyGameUI?.SetActive(currentState);
+            flappyScoreUI?.SetActive(currentState);
         }
+        else if (gameMode == GameMode.Main)
+        {
+            if (currentState == UIState.PlaneShop)
+            {
+                planeShopUI.SetButtonActive();
+            }
+            else if (currentState == UIState.Customization)
+            {
+                customizationUI.SetButtonActive();
+            }
 
-        flappyHomeUI?.SetActive(currentState);
-        flappyGameUI?.SetActive(currentState);
-        flappyScoreUI?.SetActive(currentState);
-
-        dialogueUI?.SetActive(currentState);
-        planeShopUI?.SetActive(currentState);
-        pressSpaceUI?.SetActive(currentState);
+            dialogueUI?.SetActive(currentState);
+            planeShopUI?.SetActive(currentState);
+            customizationUI?.SetActive(currentState);
+            pressSpaceUI?.SetActive(currentState);
+        }
     }
 
     #region Flappy UI
@@ -145,6 +163,13 @@ public class UIManager : MonoBehaviour
     public void SetNpcShop(NpcController npc)
     {
         planeShopUI.SetNpc(npc);
+    }
+    #endregion
+
+    #region CustomizationUI
+    public void SetNpcCustomization(NpcController npc)
+    {
+        customizationUI.SetNpc(npc);
     }
     #endregion
 

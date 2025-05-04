@@ -35,6 +35,10 @@ public class PlayerController : CreatureController
             {
                 gameManager.PlaneShopManager.ShowPlaneShopUI(npcController);
             }
+            else if (npcController.NPCType == NPCType.Customize)
+            {
+                gameManager.CustomizationManager.ShowCustomizationUI(npcController);
+            }
         }
     }
 
@@ -90,6 +94,9 @@ public class PlayerController : CreatureController
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        gameManager.UIManager.SetPressSpaceActiveFalse();
+        if (collision.gameObject.CompareTag("NPC"))
+        {
+            gameManager.UIManager.SetPressSpaceActiveFalse();
+        }
     }
 }

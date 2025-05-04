@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     private CustomizationManager customizationManager;
     public CustomizationManager CustomizationManager { get { return customizationManager; } }
 
-    private UIManager uiManager;
+    [SerializeField] private UIManager uiManager;
     public UIManager UIManager { get { return uiManager; } }
 
     //게임 모드
@@ -45,9 +45,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] PlaneType selectedPlane;
     [SerializeField] public PlaneType SelectedPlane { get { return selectedPlane; } }
 
+    //구매, 선택한 캐릭터 프리팹
+    [SerializeField] HashSet<CharacterCustomType> purchasedCustom = new HashSet<CharacterCustomType>();
+    [SerializeField] CharacterCustomType selectedCharacter;
+    [SerializeField] public CharacterCustomType SelectedCharacter { get { return selectedCharacter; } }
+
     //Point 저장
     [SerializeField] private int point = 0;
     [SerializeField] public int Point { get { return point; } }
+
+    private bool isFirst;
+
+    public GameObject playerinstance;
 
     private void Awake()
     {
@@ -61,15 +70,17 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-    }
 
-    private void Start()
-    {
         dialogue = transform.Find("DialogueManager").GetComponent<DialogueManager>();
         planeShopManager = transform.Find("PlaneShopManager").GetComponent<PlaneShopManager>();
         customizationManager = transform.Find("CustomizationManager").GetComponent<CustomizationManager>();
         uiManager = transform.Find("UIManager").GetComponent<UIManager>();
 
+        isFirst = true;
+    }
+
+    private void Start()
+    {
         LoadMainGame();
 
         PurchasePlane(PlaneType.Blue);
@@ -115,6 +126,18 @@ public class GameManager : MonoBehaviour
         {
             ChangeGameMode(GameMode.Main);
             uiManager.Init();
+
+            if (isFirst)
+            {
+                PurchaseCustom(CharacterCustomType.Pumkin);
+                SelectCustom(CharacterCustomType.Pumkin);
+                isFirst = false;
+            }
+            else
+            {
+                SelectCustom(selectedCharacter);
+            }
+           
         }
 
         CameraController camera = GameObject.Find("Main Camera").GetComponent<CameraController>();
@@ -147,6 +170,60 @@ public class GameManager : MonoBehaviour
         {
             selectedPlane = type;
         }
+    }
+    #endregion
+
+    #region Custom
+    public bool IsPurchased(CharacterCustomType type)
+    {
+        return purchasedCustom.Contains(type);
+    }
+
+    public bool IsSelected(CharacterCustomType type)
+    {
+        return selectedCharacter == type;
+    }
+
+    public void PurchaseCustom(CharacterCustomType type)
+    {
+        if (!purchasedCustom.Contains(type))
+        {
+            purchasedCustom.Add(type);
+            uiManager.UpdateMainGameUI();
+        }
+    }
+
+    public void SelectCustom(CharacterCustomType type)
+    {
+        if(IsPurchased(type))
+        {
+            selectedCharacter = type;
+            ChangeCustom();
+        }
+    }
+
+    public void ChangeCustom()
+    {
+        GameObject playerPrefab = customizationManager.GetCharacterCustom(selectedCharacter);
+        if (playerPrefab != null)
+        {
+            GameObject player = GameObject.Find("Player");
+            if (player.GetComponentInChildren<Animator>())
+            {
+                Destroy(player.GetComponentInChildren<Animator>().gameObject);
+            }
+            playerinstance = Instantiate(playerPrefab, player.transform);
+            playerinstance.transform.localPosition = Vector3.zero;
+
+
+            StartCoroutine(SetMainSprite(player.GetComponent<PlayerController>()));
+        }
+    }
+
+    IEnumerator SetMainSprite(PlayerController player)
+    {
+        yield return null;
+        player.SetMainSprite();
     }
     #endregion
 
