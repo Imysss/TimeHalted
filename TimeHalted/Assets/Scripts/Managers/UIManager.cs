@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,6 +16,7 @@ public enum UIState
     PressSpace,
     MainGame,
     Customization,
+    Color,
 }
 
 public class UIManager : MonoBehaviour
@@ -29,6 +31,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private UI_Dialogue dialogueUI;
     [SerializeField] private UI_PlaneShop planeShopUI;
     [SerializeField] private UI_Customization customizationUI;
+    [SerializeField] private UI_Color colorUI;
 
     [SerializeField] private UI_PressSpace pressSpaceUI;
 
@@ -48,6 +51,7 @@ public class UIManager : MonoBehaviour
         dialogueUI = null;
         planeShopUI = null;
         customizationUI = null;
+        colorUI = null;
 
         pressSpaceUI = null;
 
@@ -65,6 +69,9 @@ public class UIManager : MonoBehaviour
 
             customizationUI = GameObject.Find("UI_Customization").GetComponent<UI_Customization>();
             customizationUI?.Init(this);
+
+            colorUI = GameObject.Find("UI_Color").GetComponent<UI_Color>();
+            colorUI?.Init(this);
 
             pressSpaceUI = GameObject.Find("UI_PressSpace").GetComponent<UI_PressSpace>();
             pressSpaceUI?.Init(this);
@@ -106,10 +113,15 @@ public class UIManager : MonoBehaviour
             {
                 customizationUI.SetButtonActive();
             }
+            else if (currentState == UIState.Color)
+            {
+                colorUI.SetButtonActive();
+            }
 
             dialogueUI?.SetActive(currentState);
             planeShopUI?.SetActive(currentState);
             customizationUI?.SetActive(currentState);
+            colorUI?.SetActive(currentState);
             pressSpaceUI?.SetActive(currentState);
         }
     }
@@ -173,12 +185,21 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
+    #region Color
+    public void SetNpcColor(NpcController npc)
+    {
+        colorUI.SetNpc(npc);
+    }
+    #endregion
+
     #region MainGameUI
     public void UpdateMainGameUI()
     {
         mainGameUI?.SetPoint(GameManager.Instance.Point);
     }
     #endregion
+
+
 
     public void SetPressSpaceActiveFalse()
     {

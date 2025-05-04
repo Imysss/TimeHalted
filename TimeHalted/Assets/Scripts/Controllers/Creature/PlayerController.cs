@@ -39,7 +39,16 @@ public class PlayerController : CreatureController
             {
                 gameManager.CustomizationManager.ShowCustomizationUI(npcController);
             }
+            else if (npcController.NPCType == NPCType.Color)
+            {
+                gameManager.ColorManager.ShowColorUI(npcController);
+            }
         }
+    }
+
+    public void SetColor(Color color)
+    {
+        _sprite.color = color;
     }
 
     void OnMove(InputValue inputValue)

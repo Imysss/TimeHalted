@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
     private CustomizationManager customizationManager;
     public CustomizationManager CustomizationManager { get { return customizationManager; } }
 
+    private ColorManager colorManager;
+    public ColorManager ColorManager { get { return colorManager; } }
+
     [SerializeField] private UIManager uiManager;
     public UIManager UIManager { get { return uiManager; } }
 
@@ -50,13 +53,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] CharacterCustomType selectedCharacter;
     [SerializeField] public CharacterCustomType SelectedCharacter { get { return selectedCharacter; } }
 
+    //선택한 색상
+    [SerializeField] ColorType selectedColor;
+    [SerializeField] public ColorType SelectedColor { get { return selectedColor; } }
+
     //Point 저장
     [SerializeField] private int point = 0;
     [SerializeField] public int Point { get { return point; } }
 
     private bool isFirst;
 
-    public GameObject playerinstance;
+    public GameObject characterSpriteInstance;
 
     private void Awake()
     {
@@ -74,6 +81,7 @@ public class GameManager : MonoBehaviour
         dialogue = transform.Find("DialogueManager").GetComponent<DialogueManager>();
         planeShopManager = transform.Find("PlaneShopManager").GetComponent<PlaneShopManager>();
         customizationManager = transform.Find("CustomizationManager").GetComponent<CustomizationManager>();
+        colorManager = transform.Find("ColorManager").GetComponent<ColorManager>();
         uiManager = transform.Find("UIManager").GetComponent<UIManager>();
 
         isFirst = true;
@@ -212,8 +220,8 @@ public class GameManager : MonoBehaviour
             {
                 Destroy(player.GetComponentInChildren<Animator>().gameObject);
             }
-            playerinstance = Instantiate(playerPrefab, player.transform);
-            playerinstance.transform.localPosition = Vector3.zero;
+            characterSpriteInstance = Instantiate(playerPrefab, player.transform);
+            characterSpriteInstance.transform.localPosition = Vector3.zero;
 
 
             StartCoroutine(SetMainSprite(player.GetComponent<PlayerController>()));
@@ -224,7 +232,35 @@ public class GameManager : MonoBehaviour
     {
         yield return null;
         player.SetMainSprite();
+        yield return null;
+        SelectColor(ColorType.White);
     }
+
+    public Sprite GetCustomSprite()
+    {
+        return customizationManager.GetCharacterSprite(selectedCharacter);
+    }
+    #endregion
+
+    #region Color
+    public bool IsSelected(ColorType type)
+    {
+        return selectedColor == type;
+    }
+
+    public void SelectColor(ColorType type)
+    {
+        selectedColor = type;
+        ChangeColor();
+    }
+
+    public void ChangeColor()
+    {
+        PlayerController player = GameObject.Find("Player").GetComponent<PlayerController>();
+        Color color = colorManager.GetColor(selectedColor);
+        player.SetColor(color);
+    }
+
     #endregion
 
     #region Flappy Game

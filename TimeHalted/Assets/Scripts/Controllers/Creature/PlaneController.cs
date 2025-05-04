@@ -7,6 +7,7 @@ public class PlaneController : MonoBehaviour
 {
     Animator _anim;
     Rigidbody2D _rigid;
+    SpriteRenderer _sprite;
 
     private float flapForce = 6f;
     private float forwardSpeed = 3f;
@@ -26,6 +27,10 @@ public class PlaneController : MonoBehaviour
 
         _anim = GetComponentInChildren<Animator>();
         _rigid = GetComponent<Rigidbody2D>();
+        _sprite = GetComponentInChildren<SpriteRenderer>();
+
+        Sprite sprite = gameManager.GetCustomSprite();
+        SetSprite(sprite);
     }
 
     private void Update()
@@ -61,6 +66,11 @@ public class PlaneController : MonoBehaviour
         isDead = true;
 
         gameManager.FlappyGameOver();
+    }
+
+    public void SetSprite(Sprite sprite)
+    {
+        _sprite.sprite = sprite;
     }
 
     void OnFlap(InputValue inputValue)

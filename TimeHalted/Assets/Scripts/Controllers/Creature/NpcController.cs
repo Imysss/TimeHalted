@@ -7,6 +7,7 @@ public enum NPCType
     Shop,
     Customize,
     Talk,
+    Color,
 }
 public class NpcController : MonoBehaviour
 {

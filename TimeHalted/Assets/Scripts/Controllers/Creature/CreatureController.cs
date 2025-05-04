@@ -6,9 +6,7 @@ public class CreatureController : MonoBehaviour
 {
     protected Rigidbody2D _rigid;
     protected Animator _anim;
-
-    [SerializeField] private SpriteRenderer _sprite;
-    [SerializeField] private Transform weaponPivot;
+    protected SpriteRenderer _sprite;
 
     protected Vector2 moveDirection = Vector2.zero;
     public Vector2 MoveDirection { get { return moveDirection; } }
@@ -56,7 +54,6 @@ public class CreatureController : MonoBehaviour
 
     public void SetMainSprite()
     {
-        Debug.Log("SetMainSprite");
         _anim = GetComponentInChildren<Animator>();
         _sprite = GetComponentInChildren<SpriteRenderer>();
     }
@@ -101,10 +98,5 @@ public class CreatureController : MonoBehaviour
         bool isLeft = Mathf.Abs(rotZ) > 90f;
 
         _sprite.flipX = isLeft;
-
-        if (weaponPivot != null)
-        {
-            weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ);
-        }
     }
 }

@@ -32,4 +32,9 @@ public class CustomizationManager : MonoBehaviour
     {
         return playerPrefabs[(int)type];
     }
+
+    public Sprite GetCharacterSprite(CharacterCustomType type)
+    {
+        return playerPrefabs[(int)type].GetComponent<SpriteRenderer>().sprite;
+    }
 }
