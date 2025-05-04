@@ -606,7 +606,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &155652254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6493,7 +6493,7 @@ MonoBehaviour:
   selectedPlane: 0
   selectedCharacter: 0
   selectedColor: 0
-  point: 0
+  point: 650
   characterSpriteInstance: {fileID: 0}
 --- !u!4 &755522828
 Transform:
