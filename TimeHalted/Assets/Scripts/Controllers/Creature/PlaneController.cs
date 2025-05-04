@@ -71,6 +71,7 @@ public class PlaneController : MonoBehaviour
     public void SetSprite(Sprite sprite)
     {
         _sprite.sprite = sprite;
+        _sprite.material.color = gameManager.ColorManager.GetColor(gameManager.SelectedColor);
     }
 
     void OnFlap(InputValue inputValue)

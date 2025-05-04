@@ -137,6 +137,7 @@ public class GameManager : MonoBehaviour
 
             if (isFirst)
             {
+                selectedColor = ColorType.White;
                 PurchaseCustom(CharacterCustomType.Pumkin);
                 SelectCustom(CharacterCustomType.Pumkin);
                 isFirst = false;
@@ -233,7 +234,7 @@ public class GameManager : MonoBehaviour
         yield return null;
         player.SetMainSprite();
         yield return null;
-        SelectColor(ColorType.White);
+        SelectColor(selectedColor);
     }
 
     public Sprite GetCustomSprite()
