@@ -17,6 +17,7 @@ public enum UIState
     MainGame,
     Customization,
     Color,
+    Score,
 }
 
 public class UIManager : MonoBehaviour
@@ -32,6 +33,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private UI_PlaneShop planeShopUI;
     [SerializeField] private UI_Customization customizationUI;
     [SerializeField] private UI_Color colorUI;
+    [SerializeField] private UI_Score scoreUI;
 
     [SerializeField] private UI_PressSpace pressSpaceUI;
 
@@ -39,7 +41,6 @@ public class UIManager : MonoBehaviour
 
     public void Init()
     {
-        Debug.Log("init uimanger");
         gameMode = GameManager.Instance.GameMode;
 
         // 씬 전환마다 유효하지 않은 참조가 남아있지 않도록 초기화
@@ -52,6 +53,7 @@ public class UIManager : MonoBehaviour
         planeShopUI = null;
         customizationUI = null;
         colorUI = null;
+        scoreUI = null;
 
         pressSpaceUI = null;
 
@@ -72,6 +74,9 @@ public class UIManager : MonoBehaviour
 
             colorUI = GameObject.Find("UI_Color").GetComponent<UI_Color>();
             colorUI?.Init(this);
+
+            scoreUI = GameObject.Find("UI_Score").GetComponent<UI_Score>();
+            scoreUI?.Init(this);
 
             pressSpaceUI = GameObject.Find("UI_PressSpace").GetComponent<UI_PressSpace>();
             pressSpaceUI?.Init(this);
@@ -122,6 +127,7 @@ public class UIManager : MonoBehaviour
             planeShopUI?.SetActive(currentState);
             customizationUI?.SetActive(currentState);
             colorUI?.SetActive(currentState);
+            scoreUI?.SetActive(currentState);
             pressSpaceUI?.SetActive(currentState);
         }
     }
@@ -189,6 +195,13 @@ public class UIManager : MonoBehaviour
     public void SetNpcColor(NpcController npc)
     {
         colorUI.SetNpc(npc);
+    }
+    #endregion
+
+    #region Score
+    public void SetScoreUI(int score, int bestScore)
+    {
+        scoreUI.SetUI(score, bestScore);
     }
     #endregion
 

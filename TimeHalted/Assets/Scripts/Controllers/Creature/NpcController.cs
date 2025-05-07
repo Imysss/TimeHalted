@@ -8,6 +8,7 @@ public enum NPCType
     Customize,
     Talk,
     Color,
+    Score,
 }
 public class NpcController : MonoBehaviour
 {

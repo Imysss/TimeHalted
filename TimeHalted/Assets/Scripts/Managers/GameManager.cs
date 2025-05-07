@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -260,6 +261,16 @@ public class GameManager : MonoBehaviour
         PlayerController player = GameObject.Find("Player").GetComponent<PlayerController>();
         Color color = colorManager.GetColor(selectedColor);
         player.SetColor(color);
+    }
+
+    #endregion
+
+    #region Score
+    public void SetScoreUI()
+    {
+        flappyBestScore = PlayerPrefs.GetInt(BestScoreKey, 0);
+        uiManager.SetScoreUI(flappyScore, flappyBestScore);
+        uiManager.ChangeState(UIState.Score);
     }
 
     #endregion

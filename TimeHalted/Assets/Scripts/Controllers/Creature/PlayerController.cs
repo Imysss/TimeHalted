@@ -43,13 +43,15 @@ public class PlayerController : CreatureController
             {
                 gameManager.ColorManager.ShowColorUI(npcController);
             }
+            else if (npcController.NPCType == NPCType.Score)
+            {
+                gameManager.SetScoreUI();
+            }
         }
     }
 
     public void SetColor(Color color)
     {
-        Debug.Log("Set Color");
-        Debug.Log(color.ToString());
         _sprite.material.color = color;
     }
 

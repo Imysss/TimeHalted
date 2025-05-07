@@ -40,7 +40,10 @@ public class PlaneController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isDead) return;
+        if (isDead) 
+            return;
+        if (_rigid == null)
+            return;
 
         Vector3 velocity = _rigid.velocity;
         velocity.x = forwardSpeed;
